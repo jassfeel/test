@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <style>
+
+        table, th, td {
+            border: 1px solid #bcbcbc;
+        }
+
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 5px 0px 5px 0px;
+        }
+
+        th {
+            background-color: lightgrey;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+<p>
+    현재 개설된 영상상담은 아래와 같습니다.
+</p>
+
+<table id="main-table">
+    <caption>개설된 영상상담</caption>
+    <thread>
+        <tr>
+            <th>회사</th>
+            <th>상담사 ID</th>
+            <th>Room ID</th>
+            <th>생성시간</th>
+            <th>상담이동</th>
+        </tr>
+    </thread>
+    <tbody>
+    <tr th:each="room: ${roomList}">
+        <td th:text="${room.getCompanyCode()}"></td>
+        <td th:text="${room.getMasterId()}"></td>
+        <td th:text="${room.getName()}"></td>
+        <td th:text="${room.getCreateTime()}"></td>
+        <td th:if="${room.getCount() == 1}"><a th:href="@{/room/{roomId}/client(roomId=${room.getName()})}"><i class="fa fa-toggle-right fa-2x" style="color: red;"></i></a></td>
+        <td th:if="${room.getCount() == 2}"><i class="fa fa-toggle-right fa-2x" style="color: gray;"></i></td>
+    </tr>
+    </tbody>
+</table>
+<p></p>
+<p>빨강색 화살표 상자를 누르면 상담화면으로 이동합니다.</p>
+
+</body>
+</html>
